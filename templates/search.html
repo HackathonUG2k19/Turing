@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+
+
+{% endblock %}
+
+{% block body %}
+
+<div class="content">
+    <h1 style="text-align: center">Search Result</h1>
+
+<table>
+        <tr>
+            <!-- <th>Date Added</th> -->
+            <th style="text-align:center">&nbsp;&nbsp;&nbsp; Mess &nbsp;&nbsp;&nbsp;</th>
+            <th style="text-align:center">&nbsp;&nbsp;&nbsp; Food &nbsp;&nbsp;&nbsp;</th>
+            <th style="text-align:center">&nbsp;&nbsp;&nbsp; Rating &nbsp;&nbsp;&nbsp;</th>
+            <th style="text-align:center">&nbsp;&nbsp;&nbsp; Ratings till now &nbsp;&nbsp;&nbsp;</th>
+        </tr>
+        {% for item in task%}
+        <tr>
+            <!-- <td>{{ item.date_created.date() }}</td> -->
+            <td style="text-align:center">{{ item.messname }}</td>
+            <td style="text-align:center">{{ item.content }}</td>
+            
+            <td style="text-align:center">
+                {{ item.rating }}
+            </td>
+            <td style="text-align:center">
+                {{ item.num_of_rating }} &nbsp;&nbsp;
+                <a href="/update/{{item.id}}">Rate</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</div>
+{% endblock %}
