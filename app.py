@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
@@ -16,13 +16,13 @@ class Todo(db.Model):
     num_of_rating = db.Column(db.Integer(), nullable = False)
 
     def __repr__(self):
-        return '<Task %r>' % self.id
+        return '<Task %r>' % self.content
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        task_content = request.form['content']
-        task_messname = request.form['messname']
+        task_content = request.form['content'].capitalize()
+        task_messname = request.form['messname'].capitalize()
         task_rating = request.form['rating']
         task_num_of_rating = 1
         new_task = Todo(content=task_content, messname=task_messname, rating=task_rating, num_of_rating=task_num_of_rating)
@@ -57,8 +57,16 @@ def update(id):
     else :
          return render_template('update.html', task=task)
 
-# @app.route('/search/<int:id>', methods=['GET','POST'])
-# def search():
-# SEARCH FUCTION HERE
+@app.route('/search', methods=['GET','POST'])
+def search():
+    task = Todo.query.order_by(Todo.content).all()
+    name_search = request.args.get('content')
+    try:
+        all_foods = Todo.query.filter(Todo.content.contains(name_search)).order_by(Todo.content).all()
+        return render_template('search.html', task=all_foods)
+    except:
+        return 'There is no such food item'
+    
+
 if __name__ == "__main__":
     app.run(debug=True)
