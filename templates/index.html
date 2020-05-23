@@ -22,10 +22,12 @@
 </ul>
 </div>
  <li>
-<div class="humberger__menu__wrapper">
+<div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+        
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="./index.html">Home</a></li>
                 <li><a href="#">Lunch Today</a></li>
                 <li><a href="#">Dinner Today</a></li>
                 <li><a href="#">Breakfasr Tomorrow</a></li>
@@ -33,11 +35,11 @@
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
-</div>
-
-<div id="preloder">
-        <div class="loader"></div>
     </div>
+
+<!-- <div id="preloder">
+        <div class="loader"></div>
+    </div> -->
 
 <header class="header">
         <div class="container">
@@ -190,8 +192,20 @@
     <br>
     <br>
     <!-- SEARCH BOX HERE -->
-
+<!--     <form action="{{ url_for('search') }}" method="get" class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" name="content" class="form-control" placeholder="Food...">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+          </form> -->
 <div class="content" style="padding-left: 20%;">
+    <form action="{{ url_for('search') }}" method="get" class="navbar-form navbar-left">
+            <div class="form-group" style="padding-right: 20%">
+              <input type="text" name="content" class="form-control" placeholder="Search the food item">
+            </div>
+            <button type="submit">Search</button>
+          </form>
+          <br><br>
     <table>
         <tr>
             <!-- <th>Date Added</th> -->
@@ -230,11 +244,6 @@
     <h2>Add your food item</h2>
     <br><br>
     <form action="/" method="POST">
-        <label for="content">Food item:</label>
-        <br>
-        <input type="text" name="content" id="content">
-        <br>
-        <br>
         <p>MESS:</p>
         <input type="radio" name="messname" id="messname" value="North">
         <label for="North">North</label><br>
@@ -244,6 +253,11 @@
         <label for="North">Kadamb</label><br>
         <input type="radio" name="messname" id="messname" value="Yuktahar">
         <label for="North">Yuktahar</label>
+        <br>
+        <br>
+        <label for="content">Food item:</label>
+        <br>
+        <input type="text" name="content" id="content">
         <br>
         <br>
         <label for="rating">Rating: </label>
