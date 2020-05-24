@@ -1,5 +1,5 @@
 import os,json
-from datetime import datetime , timedelta
+from datetime import datetime , timedelta , date
 from flask import Flask, session, redirect, render_template, request, jsonify, flash
 from flask_session import Session
 from sqlalchemy import create_engine
@@ -27,10 +27,10 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(400), nullable = False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    dayname = db.Column(db.String(10), nullable= False)
     messname = db.Column(db.String(400), nullable = False)
     rating = db.Column(db.Float(), nullable = False)
     num_of_rating = db.Column(db.Integer(), nullable = False)
-
     def __repr__(self):
         return '<Task %r>' % self.id
 
@@ -85,8 +85,9 @@ def index():
         task_content = request.form['content']
         task_messname = request.form['messname']
         task_rating = request.form['rating']
+        task_day = request.form['dayname']
         task_num_of_rating = 1
-        new_task = Todo(content=task_content, messname=task_messname, rating=task_rating, num_of_rating=task_num_of_rating)
+        new_task = Todo(content=task_content, messname=task_messname, rating=task_rating, num_of_rating=task_num_of_rating, dayname=task_day)
 
         try:
             db.session.add(new_task)
