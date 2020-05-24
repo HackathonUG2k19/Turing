@@ -207,6 +207,7 @@
             <!-- <th>Date Added</th> -->
             <th style="text-align:center">&nbsp;&nbsp;&nbsp; Mess &nbsp;&nbsp;&nbsp;</th>
             <th style="text-align:center">&nbsp;&nbsp;&nbsp; Food &nbsp;&nbsp;&nbsp;</th>
+            <th style="text-align:center">&nbsp;&nbsp;&nbsp; Day &nbsp;&nbsp;&nbsp;</th>
             <th style="text-align:center">&nbsp;&nbsp;&nbsp; Rating &nbsp;&nbsp;&nbsp;</th>
             <th style="text-align:center">&nbsp;&nbsp;&nbsp; Ratings till now &nbsp;&nbsp;&nbsp;</th>
         </tr>
@@ -215,7 +216,7 @@
             <!-- <td>{{ task.date_created.date() }}</td> -->
             <td style="text-align:center">{{ task.messname }}</td>
             <td style="text-align:center">{{ task.content }}</td>
-            
+            <td style="text-align:center">{{ task.dayname }}</td>
             <td style="text-align:center">
                 {{ task.rating }}
             </td>
@@ -257,6 +258,18 @@
         <input type="text" name="content" id="content">
         <br>
         <br>
+        <label for="dayname">Day:</label>
+        <br>
+        <select id="dayname" name="dayname">
+            <option value='Sunday'>Sunday</option>
+            <option value='Monday'>Monday</option>
+            <option value='Tuesday'>Tuesday</option>
+            <option value='Wednesday'>Wednesday</option>
+            <option value='Thursday'>Thursday</option>
+            <option value='Friday'>Friday</option>
+            <option value='Saturday'>Saturday</option>
+        </select>
+        <br><br>
         <label for="rating">Rating: </label>
         <br>
         <input type="number" name="rating" id="rating" min="1" max="5">
@@ -266,6 +279,9 @@
     </form>
 </div>
 <br><br><br>
+<a href="/signout" >
+        LOG OUT
+        </a>
 <script src="{{ url_for('static' , filename='js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ url_for('static' , filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static' , filename='js/jquery.slicknav.js') }}"></script>
